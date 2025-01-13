@@ -1,12 +1,16 @@
     # Step1: Data Prep
+    # import needed packages
 import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score, classification_report
+import matplotlib.pyplot as plt
 # Load the dataset
 data = pd.read_csv('/Users/macbook/Downloads/divorce2.csv')
 print(data.head(170))
 # Get the number of rows and columns in the dataset
 rows, columns = data.shape
 rows, columns
-
 
     # Step2: Group the Attributes
 # Define the groups and their corresponding variables
@@ -21,13 +25,7 @@ groups = {
 for group, variables in groups.items():
     data[group] = data[variables].mean(axis=1)
 
-
 # Step3: Machine Learning Analysis Method [Logistic Regression]
-    # import needed packages
-from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import accuracy_score, classification_report
-import matplotlib.pyplot as plt
     # Features and target
 features = data[list(groups.keys())]
 target = data["Class"]
@@ -49,7 +47,6 @@ odds_ratios = np.exp(coefficients)
 print("\nFeature Importance (Logistic Regression):")
 for feature, coef, odds in zip(features.columns, coefficients, odds_ratios):
     print(f"{feature}: Coefficient = {coef:.2f}, Odds Ratio = {odds:.2f}")
-
 
 # Step4: Visualization
     # Data for visualization

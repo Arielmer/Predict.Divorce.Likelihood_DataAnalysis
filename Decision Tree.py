@@ -1,5 +1,11 @@
     # Step1: Data Prep
 import pandas as pd
+from sklearn.tree import DecisionTreeClassifier, plot_tree
+from sklearn.metrics import accuracy_score, classification_report
+from sklearn.model_selection import train_test_split
+import matplotlib.pyplot as plt
+import pandas as pd
+
 # Load the dataset
 data = pd.read_csv('/Users/macbook/Downloads/divorce2.csv')
 print(data.head(170))
@@ -23,10 +29,6 @@ for group, variables in groups.items():
 
 
 # Step3: Machine Learning Analysis Method [Decision Tree]
-    # Import needed package
-from sklearn.tree import DecisionTreeClassifier, plot_tree
-from sklearn.metrics import accuracy_score, classification_report
-from sklearn.model_selection import train_test_split
     # Features and target
 features = data[list(groups.keys())]
 target = data["Class"]
@@ -41,7 +43,7 @@ y_pred_tree = decision_tree.predict(X_test)
 print("\nDecision Tree Model")
 print(f"Accuracy: {accuracy_score(y_test, y_pred_tree):.2f}")
 print(classification_report(y_test, y_pred_tree))
-'''''
+
 # Step 4: Visualization
     # Visualize the Decision Tree
 plt.figure(figsize=(15, 10))
@@ -52,8 +54,6 @@ plt.show()
 print("\nFeature Importance (Decision Tree):")
 for feature, importance in zip(X_train.columns, decision_tree.feature_importances_):
     print(f"{feature}: Importance = {importance:.2f}")
-import matplotlib.pyplot as plt
-import pandas as pd
     # Assuming X_train.columns and decision_tree.feature_importances_ are available
     # Example feature names and importance values for visualization
 feature_names = X_train.columns
@@ -71,4 +71,3 @@ plt.ylabel("Feature")
 plt.title("Feature Importance (Decision Tree)")
 plt.gca().invert_yaxis()  # Invert y-axis to show the highest importance at the top
 plt.show()
-'''''
